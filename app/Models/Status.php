@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
+    protected $fillable = [  'status' ];
+
+    public function bookStatus()
+    {
+        return $this->hasMany(BookStatus::class, 'status_id');
+    }
 }
+
