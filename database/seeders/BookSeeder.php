@@ -42,6 +42,7 @@ class BookSeeder extends Seeder
                     $author_data = Author::firstOrCreate([
                         'name'=>$author
                     ]);
+
                     $author_data = Author::where('name','=',$author)->first();
                     echo 'id:',$author_data->id;
                     BookAuthor::firstOrCreate([
