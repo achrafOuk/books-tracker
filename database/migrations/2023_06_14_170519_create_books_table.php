@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
+        // thumbneal, image,publication_year
         Schema::create('books', function (Blueprint $table) {
             $table->string('slug')->primary();
-            $table->string('name');
+            $table->string('thumbneal');
             $table->string('image');
-            $table->text('description');
-            $table->float('rating');
+            $table->integer('publication_year');
+            $table->string('name');
         });
     }
-
     /**
      * Reverse the migrations.
      *

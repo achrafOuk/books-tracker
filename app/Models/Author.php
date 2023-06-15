@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-    protected $primaryKey = 'slug';
     public $incrementing = false;
+    public $timestamps = false;
 
-    protected $fillable = [ 'slug', 'name', ];
+    protected $fillable = [  'name', ];
 
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_author', 'author_id', 'book_id');
+        return $this->belongsToMany(Book::class, 'book_authors', 'id', 'id');
     }
 }
 

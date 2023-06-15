@@ -8,32 +8,33 @@ class Book extends Model
 {
     protected $primaryKey = 'slug';
     public $incrementing = false;
-
-    protected $fillable = [ 'slug', 'name', 'image', 'description', 'rating', ];
+    public $timestamps = false;
+    
+    protected $fillable = [ 'slug', 'name', 'image', 'thumbneal', 'publication_year' ];
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class, 'book_author', 'book_id', 'author_id');
+        return $this->belongsToMany(Author::class, 'book_author', 'id', 'id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'book_category', 'book_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'book_category', 'id', 'id');
     }
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'book_id', 'slug');
+        return $this->hasMany(Note::class, 'id', 'slug');
     }
 
     public function status()
     {
-        return $this->hasMany(BookStatus::class, 'book_id', 'slug');
+        return $this->hasMany(BookStatus::class, 'id', 'slug');
     }
 
     public function comments()
     {
-        return $this->hasMany(BookComment::class, 'book_id', 'slug');
+        return $this->hasMany(BookComment::class, 'id', 'slug');
     }
 }
 

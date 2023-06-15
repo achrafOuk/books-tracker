@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
     protected $fillable = [ 'book_id', 'user_id', 'note', ];
+    public $timestamps = false;
 
     public function book()
     {
