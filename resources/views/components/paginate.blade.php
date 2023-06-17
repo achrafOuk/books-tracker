@@ -1,4 +1,4 @@
-<nav aria-label="Page navigation example" class="mt-[2%]">
+<nav aria-label="Page navigation example" class="flex justify-center mt-8">
   <ul class="inline-flex -space-x-px">
     <li>
       <a href="{{  $books->currentPage() != 1 ? $books->url($books->currentPage()-1) :'' }}" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ">
