@@ -15,7 +15,12 @@ class BookController extends Controller
     }
     public function show($slug)
     {
-        $book = Book::findOrFail($slug)->with('authors')->first();
+        $book = Book::where('slug','=',$slug);
+        if(!$book->exists())
+        {
+            return redirect('/404');
+        }
+        $book = $book->with(['authors','categories'])->first();
         return view( 'pages.books.show',compact('book') ) ;
     }
 }

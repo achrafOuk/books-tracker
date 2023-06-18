@@ -3,7 +3,7 @@
 <section class="text-gray-700 body-font overflow-hidden bg-white">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="{{ $book->image }}">
+      <img alt="{{ $book->name }}" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="{{$book->image}}">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h1 class="text-black text-3xl title-font font-medium mb-1">{{ $book->name }}</h1>
         <div class="flex mb-4">
@@ -29,26 +29,26 @@
 
         <p class="text-gray-600 mb-4">
             <span class="font-semibold">Author(s):</span> 
-            {{-- @foreach( $book->authors as $author) --}}
-            @for($i=0;$i< count( $book->authors );$i++)
-              {{ $book->authors[$i]->name }}
-              @if( $i+1 < count( $book->authors ) )
-              ,
-              @endif
-            @endfor
+            @foreach( $book->authors as $author) 
+              {{ $author->name }}
+            @endforeach
         </p>
 
         <p class="text-gray-600 mb-4">
-            <span class="font-semibold">Categories:</span> Category 1, Category 2
+            <span class="font-semibold">Categories:</span> 
+            @foreach( $book->categories as $category) 
+              {{ $category->name }}
+            @endforeach
         </p>
 
         <p class="text-gray-600 mb-4">
             <span class="font-semibold">Publication Date:</span> {{ $book->publication_year }}
         </p>
 
-        {{-- <p class="leading-relaxed">
-            Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
-        --}}
+        {{-- --}}
+          <p class="leading-relaxed">
+            {{ $book->description }}
+          </p>
 
 
       </div>
