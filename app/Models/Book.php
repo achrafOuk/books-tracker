@@ -10,7 +10,7 @@ class Book extends Model
     public $incrementing = false;
     public $timestamps = false;
     
-    protected $fillable = [ 'slug', 'name', 'image', 'thumbneal', 'publication_year' ];
+    protected $fillable = [ 'slug', 'name', 'image', 'publication_year','description'];
 
     public function authors()
     {
@@ -19,7 +19,7 @@ class Book extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'book_category', 'id', 'id');
+        return $this->belongsToMany(Category::class, 'book_categories', 'book_id', 'category_id');
     }
 
     public function notes()

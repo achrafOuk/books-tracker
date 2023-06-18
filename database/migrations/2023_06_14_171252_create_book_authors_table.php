@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('book_authors', function (Blueprint $table) {
             $table->id();
-            #$table->foreign('author_id')->references('authors')->on('id');
             $table->foreignId('author_id')->constrained('authors','id')->onDelete('cascade');
             $table->string('book_id');
             $table->foreign('book_id')->references('slug')->on('books')->onDelete('cascade');

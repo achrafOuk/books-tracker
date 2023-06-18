@@ -16,10 +16,10 @@ return new class extends Migration
         // thumbneal, image,publication_year
         Schema::create('books', function (Blueprint $table) {
             $table->string('slug')->primary();
-            $table->string('thumbneal');
-            $table->string('image');
-            $table->integer('publication_year');
             $table->string('name');
+            $table->string('image');
+            $table->text('description');
+            $table->integer('publication_year');
         });
     }
     /**

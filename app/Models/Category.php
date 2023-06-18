@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $primaryKey = 'slug';
     public $incrementing = false;
+    public $timestamps = false;
 
-    protected $fillable = [ 'slug', 'name' ];
+    protected $fillable = [ 'name' ];
 
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_category', 'category_id', 'book_id');
+        return $this->belongsToMany(Book::class, 'book_categories', 'category_id', 'book_id');
     }
 }
 

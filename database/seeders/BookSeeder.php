@@ -6,8 +6,11 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\BookAuthor;
+use App\Models\BookCategory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class BookSeeder extends Seeder
 {
@@ -18,45 +21,52 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        $books_file = storage_path('app/public/books.csv');
-        $file_data = fopen($books_file,'r');
-        $data = fgetcsv($file_data,1000,';');
-        $num = count($data);
-        $row = 1;
-        while(  $data !==false )
-        {
-            if($row !=1)
-            {
-                // 'slug', 'name', 'image', 'thumbneal', 'publication_year' 
-                $book_title = $data[1];
-                $book = Book::firstOrCreate([
-                    'slug'=>Str::slug($book_title, '-'),
-                    'name'=>$book_title,
-                    'publication_year'=>$data[3],
-                    'thumbneal'=>$data[6],
-                    'image'=>$data[7]
-                ]);
-                $authors = explode( '&amp',$data[2] );
-                foreach($authors as $author)
-                {
-                    $author_data = Author::firstOrCreate([
-                        'name'=>$author
-                    ]);
 
-                    $author_data = Author::where('name','=',$author)->first();
-                    echo 'id:',$author_data->id;
-                    BookAuthor::firstOrCreate([
-                        'author_id'=>$author_data->id ,
-                        'book_id'=>$book->slug, 
-                    ]);
-                }
-            }
-            $row++;
-            if($row== 5000)
+        $url = "https://www.googleapis.com/books/v1/volumes?q=\"\"";
+        $response = Http::get($url)->json();
+        $item = 0;
+
+        foreach ($response["items"] as $book) {
+            echo "id:$item\n";
+            $item++;
+            $volume = $book["volumeInfo"];
+            $title = $volume["title"];
+            $authors = $volume["authors"] ?? ["Unknown"];
+            $description = $volume["description"] ?? "No description available.";
+            $categories = $volume["categories"] ?? ["Unknown"];
+            $thumbnail = $volume["imageLinks"]["thumbnail"] ?? "";
+            $publish_date = $volume["publishedDate"] ?? "";
+            $book = Book::firstOrCreate([
+                'slug'=>Str::slug($title),
+                'name'=>$title,
+                'image'=>$thumbnail,
+                'publication_year' => explode('-',$publish_date)[0],
+                'description'=>$description,
+            ]);
+            foreach($authors as $author)
             {
-                break;
+                $author_data = Author::firstOrCreate([
+                    'name'=>$author
+                ]);
+                $author_data = Author::where('name','=',$author)->first();
+                BookAuthor::firstOrCreate([
+                    'author_id'=>$author_data->id ,
+                    'book_id'=>$book->slug, 
+                ]);
             }
-            $data = fgetcsv($file_data,1000,';');
+            foreach($categories as $category)
+            {
+                $category_data = Category::firstOrCreate([
+                    'name' =>$category
+                ]);
+                $category_data = Category::where('name','=',$category)->first();
+                echo("category id ");
+                BookCategory::firstOrCreate([
+                    'book_id'=>$book->slug, 
+                    'category_id'=>$category_data->id, 
+                ]);
+            }
         }
     }
+
 }
