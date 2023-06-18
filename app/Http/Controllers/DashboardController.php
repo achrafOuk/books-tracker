@@ -10,7 +10,7 @@ class DashboardController extends Controller
     //
 
     public function __construct() {
-        $this->columns =[ 'id', 'thumbneal', 'name', 'publication year' ];
+        $this->columns =[ 'id', 'thumbneal', 'name', 'publication year','actions' ];
     }
     public function index()
     {

@@ -9,7 +9,7 @@ class BookAuthor extends Model
     protected $table = 'book_authors';
     public $timestamps = false;
 
-    protected $fillable = [ 'author_id', 'book_id', ];
+    protected $fillable = [ 'author_id', 'book_id' ];
 
     public function book()
     {

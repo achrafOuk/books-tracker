@@ -13,4 +13,9 @@ class BookController extends Controller
         $books = Book::paginate(20);
         return view( 'pages.books.index',compact('books') ) ;
     }
+    public function show($slug)
+    {
+        $book = Book::findOrFail($slug)->with('authors')->first();
+        return view( 'pages.books.show',compact('book') ) ;
+    }
 }

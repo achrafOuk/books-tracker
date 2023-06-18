@@ -17,6 +17,11 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/',[BookController::class,'index'])->name('index');
 
+Route::group(['prefix'=>'books'],function(){
+    Route::get('/{slug}', [BookController::class, 'show'])->name('book-show');
+
+});
+
 Route::group(['prefix'=>'dashboard'],function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
