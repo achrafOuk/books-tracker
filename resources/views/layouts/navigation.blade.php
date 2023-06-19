@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex font-bold items-center text-black">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('index') }}">
                         Books tracker
                     </a>
                 </div>

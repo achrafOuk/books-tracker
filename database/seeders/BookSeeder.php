@@ -21,21 +21,21 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-
-        $url = "https://www.googleapis.com/books/v1/volumes?q=\"\"";
-        $response = Http::get($url)->json();
-        $item = 0;
-        for($i=0;$i<20;$i++)
+        $alphabet = array_merge( range('a', 'z') );
+        foreach($alphabet as $character)
+        {
+            $url = "https://www.googleapis.com/books/v1/volumes?q=$character";
+            $response = Http::get($url)->json();
             foreach ($response["items"] as $book) {
-                echo "id:$item\n";
-                $item++;
                 $volume = $book["volumeInfo"];
                 $title = $volume["title"];
                 $authors = $volume["authors"] ?? ["Unknown"];
                 $description = $volume["description"] ?? "No description available.";
                 $categories = $volume["categories"] ?? ["Unknown"];
                 $thumbnail = $volume["imageLinks"]["thumbnail"] ?? "";
-                $publish_date = $volume["publishedDate"] ?? "";
+                $publish_date = $volume["publishedDate"] ?? 2000;
+                try{
+
                 $book = Book::firstOrCreate([
                     'slug'=>Str::slug($title),
                     'name'=>$title,
@@ -66,7 +66,13 @@ class BookSeeder extends Seeder
                         'category_id'=>$category_data->id, 
                     ]);
                 }
+              }
+              catch(\Exception $e)
+              {
+
+              }
             }
         }
+    }
 
 }
