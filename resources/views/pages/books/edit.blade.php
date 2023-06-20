@@ -1,6 +1,6 @@
 
 <x-book-form 
-    route="{{ route('store-book') }}" 
+    route="{{ route('update-book',['slug'=>$book->slug]) }}" 
     page="Add new book" 
     :name="$book->name" 
     :image="$book->image" 

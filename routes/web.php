@@ -28,6 +28,7 @@ Route::group(['prefix'=>'dashboard'],function(){
         Route::get('add', [BookController::class, 'create'])->name('create-book');
         Route::post('add', [BookController::class, 'store'])->name('store-book');
         Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit-book');
+        Route::post('/{slug}/edit', [BookController::class, 'update'])->name('update-book');
     });
 
 
