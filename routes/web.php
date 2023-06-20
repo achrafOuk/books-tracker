@@ -26,6 +26,8 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix'=>'books'],function(){
         Route::get('add', [BookController::class, 'create'])->name('create-book');
+        Route::post('add', [BookController::class, 'store'])->name('store-book');
+        Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit-book');
     });
 
 

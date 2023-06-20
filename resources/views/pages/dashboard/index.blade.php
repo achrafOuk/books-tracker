@@ -41,7 +41,7 @@
                     </td>
 
                     <td class="flex px-4 py-2">
-                        <a href="">
+                        <a href="{{ route('edit-book',['slug'=>$book->slug]) }}">
                             <button class="bg-purple text-white font-bold py-2 px-4 rounded mr-2">update</button>
                         </a>
                         <form method="POST" action="">
