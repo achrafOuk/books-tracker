@@ -79,11 +79,9 @@ class BookController extends Controller
     public function edit($slug)
     {
         $book = Book::where('slug','=',$slug);
-        if(!$book->exists())
-        {
-            return redirect('/404');
-        }
+        if(!$book->exists()) return redirect('/404');
         $book = $book->with(['authors','categories'])->first();
+        //dd($book->slug);
         return view( 'pages.books.edit',['book'=>$book,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
     public function update($slug,BookRequest $request)

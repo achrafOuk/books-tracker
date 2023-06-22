@@ -1,4 +1,3 @@
-
 <x-book-form 
     route="{{ route('update-book',['slug'=>$book->slug]) }}" 
     page="Add new book" 
@@ -8,6 +7,6 @@
     :description="$book->description" 
     :authors="$authors" 
     :categories="$categories" 
-    :category=" $book->categories[0]->name" 
+    :category=" $book->categories[0]->name ?? '' " 
     :selected_authors="$book->authors"
 />
