@@ -1,5 +1,5 @@
 <div class="mb-4 flex">
-    <textarea class="w-full resize-none rounded-lg border border-gray-300 px-4 py-2 focus:outline-none" placeholder="Enter your comment"></textarea>
+    <textarea class="w-full  rounded-lg border border-gray-300 px-4 py-2 focus:outline-none" placeholder="Enter your comment"></textarea>
   </div>
 
 <div class="mb-4 flex items-center">
@@ -17,3 +17,5 @@
         <label for="rating-1" class="cursor-pointer text-2xl">&#9733;</label>
     </div>
 </div>
+
+<button class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600 focus:outline-none">Submit</button>
