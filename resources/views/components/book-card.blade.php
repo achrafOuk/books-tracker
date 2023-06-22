@@ -10,8 +10,12 @@
             <i class="icon-heart-o h-6 w-6 font-bold"></i>
         </button>
     </div>
-    <div class="p-4">
+    <div class="p-4 w-full h-[50px] truncate" >
         <a href="{{route('book-show',['slug'=>$book->slug])}}" class="text-lg font-semibold">{{ $book->name }}</a>
     </div>
+
+    <span class="flex items-center">
+        <x-rating-system :rating="$book->comments->average('rating') "/>
+    </span>
     </div>
 </div>
