@@ -5,12 +5,11 @@
     <div class="flex flex-row">
         {{-- <x-search-component  action="{{route('seach-books-dashboard')}}" :searchTerm="empty($searchTerm) ? '': $searchTerm" :areas="$areas" :categories="$categories" /> --}}
         <div class="flex flex-col w-full md:w-[100%] ">
-            <a href="{{ route('create-book') }}" >
-                <button class="bg-purple p-5 text-white mb-5 w-fit whitespace-nowrap">
+            <button class="bg-purple p-5 text-white mb-5 w-fit whitespace-nowrap">
+                <a href="{{ route('create-book') }}" >
                     Add new book
-                </button>
-            </a>
-
+                </a>
+            </button>
         <div class="mb-5">
         <table class="table-auto border xl:w-full">
             <thead>

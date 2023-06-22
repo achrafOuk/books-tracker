@@ -26,6 +26,7 @@ class BookController extends Controller
         $books = Book::paginate(12);
         return view( 'pages.books.index',compact('books') ) ;
     }
+
     public function show($slug)
     {
         $book = Book::where('slug','=',$slug);
@@ -33,15 +34,17 @@ class BookController extends Controller
         {
             return redirect('/404');
         }
-        $book = $book->with(['authors','categories'])->first();
+        $book = $book->with(['authors','categories','comments'])->withCount('comments as total_comments')->first();
         return view( 'pages.books.show',compact('book') ) ;
     }
+
     public function create()
     {
         $authors = Author::select('name')->get();
         $categories = Category::select('name')->get();
         return view( 'pages.books.add',['authors'=>$this->authors,'categories'=>$this->categories ] ) ;
     }
+
     public function store(BookRequest $request)
     {
         $book_data = $request->validated();
@@ -76,13 +79,14 @@ class BookController extends Controller
         ->with('type','green');
 
     }
-    //public function edit($slug)
-    public function edit( Book $book)
+    public function edit($slug)
     {
+        $book = Book::where('slug','=',$slug);
         if(!$book->exists()) return redirect('/404');
         $book = $book->with(['authors','categories'])->first();
         return view( 'pages.books.edit',['book'=>$book,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
+
     public function update( $slug,BookRequest $request)
     {
         $book_data = $request->validated();

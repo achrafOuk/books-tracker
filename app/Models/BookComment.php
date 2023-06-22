@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookComment extends Model
 {
-    protected $table = 'books_commect';
+    protected $table = 'book_comments';
     public $timestamps = false;
 
     protected $fillable = [  'user_id', 'book_id', 'comment', 'rate', ];
