@@ -1,14 +1,25 @@
 <x-app-layout>
 
-<section class="flex flex-col md:flex-row h-auto ">
+<section class="flex flex-col md:flex-row h-auto " x-data="{admin_account:true}">
   <div class="bg-white w-full md:mx-auto md:full h-screen px-6 lg:px-16 flex">
     <div class="w-full h-100">
       <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
+
+      <div class="flex flex-row mt-2">
+        <button class="bg-purple mr-[1%] w-1/2 p-4 text-white" x-on:click="admin_account = false">User</button>
+        <button class="bg-purple ml-[1%] w-1/2 p-4 text-white" x-on:click="admin_account = true">Admin</button>
+      </div>
+
       <form class="mt-6" action="{{route('login')}}" method="POST">
         @csrf
         <div>
           <label class="block text-gray-700">Email Address</label>
-          <input type="email" name="email" value="admin@admin.com" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          <template x-if="admin_account">
+            <input type="email" name="email" value="admin@admin.com" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          </template>
+          <template x-if="!admin_account">
+            <input type="email" name="email" value="user@user.com" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          </template>
         </div>
 
         <div class="mt-4">
@@ -31,8 +42,6 @@
         <p >Need an account?  <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-700 font-semibold">Create an account</a></p>
 
       </form>
-
-
     </div>
   </div>
 
