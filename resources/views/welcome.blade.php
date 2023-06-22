@@ -2,6 +2,6 @@
     <x-app-layout>
     </x-app-layout>
 @else
-    <x-guest-layout>
-    </x-guest-layout>
+    <x-app-layout>
+    </x-app-layout>
 @endauth
