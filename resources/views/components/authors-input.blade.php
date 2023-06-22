@@ -1,6 +1,6 @@
 @props(['authors','selected_authors'])
 
-<div x-data="{ authors: {{ json_encode($selected_authors->count() > 0 ? $selected_authors : ['name'=>'']) }} }">
+<div x-data="{ authors: {{ json_encode( count( $selected_authors) > 0 ? $selected_authors : ['name'=>'']) }} }">
       <label class="mb-2 block text-sm font-bold text-gray-700" >Authors: </label>
         <template x-for="(author,index ) in authors" :key="index">
         <div class="flex mb-2" >

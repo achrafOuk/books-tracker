@@ -8,15 +8,14 @@
         @csrf
         <div>
           <label class="block text-gray-700">Email Address</label>
-          <input type="email" name="email" value="achraf@test.com" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          <input type="email" name="email" value="admin@admin.com" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
         </div>
 
         <div class="mt-4">
           <label class="block text-gray-700">Password</label>
-          <input type="password" name="password" value="12345678" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+          <input type="password" name="password" value="123456" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                 focus:bg-white focus:outline-none" required>
         </div>
-
 
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">

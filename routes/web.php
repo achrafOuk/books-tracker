@@ -4,16 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/',[BookController::class,'index'])->name('index');
 
@@ -22,20 +13,18 @@ Route::group(['prefix'=>'books'],function(){
 
 });
 
-Route::group(['prefix'=>'dashboard'],function(){
+Route::group(['prefix'=>'dashboard','role:admin'],function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix'=>'books'],function(){
         Route::get('add', [BookController::class, 'create'])->name('create-book');
         Route::post('add', [BookController::class, 'store'])->name('store-book');
         Route::get('/{slug}/edit', [BookController::class, 'edit'])->name('edit-book');
         Route::post('/{slug}/edit', [BookController::class, 'update'])->name('update-book');
-        // Route::post('/{slug}/delete', [BookController::class, 'delete'])->name('delete-book');
         Route::post('/{slug}/delete', [BookController::class, 'delete'])->name('delete-book');
     });
 
 
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

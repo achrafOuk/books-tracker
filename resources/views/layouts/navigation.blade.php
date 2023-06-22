@@ -12,9 +12,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @if ( !auth()->check() ||   Auth::user()->type =='normal'  )
+                    @if ( !auth()->check() || Auth::user()->hasRole('user')  )
                         <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                             Home
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            dashboard
                         </x-nav-link>
                     @endif
                 </div>
@@ -29,7 +33,7 @@
                     <div class="sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-transparent  focus:outline-none transition ease-in-out duration-150">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black bg-transparent  focus:outline-none transition ease-in-out duration-150">
                                     <div>{{ Auth::user()->name }}</div>
 
                                     <div class="ml-1">
@@ -65,14 +69,14 @@
                     @else
                         <div class="sm:flex sm:gap-4">
                             <a
-                                class="block rounded-md bg-orange px-5 py-2.5 text-sm font-medium text-white transition hover:bg-orange"
+                                class="block rounded-md bg-purple px-5 py-2.5 text-sm font-medium text-white transition hover:bg-purple"
                                 href="{{route('login')}}"
                             >
                                 Login
                             </a>
 
                             <a
-                                class="hidden rounded-md bg-white px-5 py-2.5 text-sm font-medium text-orange transition hover:text-orange/75 sm:block"
+                                class="hidden rounded-md bg-white px-5 py-2.5 text-sm font-medium text-purple transition hover:text-purple/75 sm:block"
                                 href="{{route('register')}}"
                             >
                                 Register

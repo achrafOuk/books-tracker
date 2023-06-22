@@ -40,7 +40,7 @@ class BookController extends Controller
     {
         $authors = Author::select('name')->get();
         $categories = Category::select('name')->get();
-        return view( 'pages.books.add',['authors'=>$this->authors,'categories'=>$this->categogires] ) ;
+        return view( 'pages.books.add',['authors'=>$this->authors,'categories'=>$this->categories ] ) ;
     }
     public function store(BookRequest $request)
     {

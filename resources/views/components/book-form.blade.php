@@ -46,7 +46,7 @@
           </datalist>
         </div>
 
-        <x-authors-input :authors="$authors" :selected_authors="$selected_authors" />
+        <x-authors-input :authors="$authors" :selected_authors="$selected_authors ?? ['name'=>'']" />
         <div class="flex items-center justify-between">
           <button type="submit" class="focus:shadow-outline rounded bg-purple w-full px-4 py-2 font-bold text-white focus:outline-none" type="button">Submit</button>
         </div>
