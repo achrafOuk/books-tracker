@@ -76,15 +76,14 @@ class BookController extends Controller
         ->with('type','green');
 
     }
-    public function edit($slug)
+    //public function edit($slug)
+    public function edit( Book $book)
     {
-        $book = Book::where('slug','=',$slug);
         if(!$book->exists()) return redirect('/404');
         $book = $book->with(['authors','categories'])->first();
-        //dd($book->slug);
         return view( 'pages.books.edit',['book'=>$book,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
-    public function update($slug,BookRequest $request)
+    public function update( $slug,BookRequest $request)
     {
         $book_data = $request->validated();
         $book = Book::where('slug','=',$slug)
@@ -95,7 +94,6 @@ class BookController extends Controller
             'description'=>$book_data['description'],
          ]);
         $book = Book::where('slug','=',$slug)->first();
-
         $category = Category::firstOrCreate([ 'name'=>$book_data['category'] ]);
         $category = Category::where('name','=',$book_data['category'])->first();
         BookCategory::where('book_id','=',$book->slug)->delete();
@@ -103,7 +101,6 @@ class BookController extends Controller
             'category_id'=>$category->id,
             'book_id' =>$book->slug
         ]);
-
         BookAuthor::where('book_id','=',$book->slug)->delete();
         foreach( $book_data['authors'] as $author )
         {
@@ -117,6 +114,15 @@ class BookController extends Controller
         return back()
         ->with('msg','book was updated')
         ->with('type','green');
+    }
 
+    public function delete($slug)
+    {
+        $book = Book::where('slug','=',$slug);
+        if(!$book->exists()) return redirect('/404');
+        $book = $book->delete();
+        return redirect()->route('dashboard')
+        ->with('msg','book was deleted')
+        ->with('type','green');
     }
 }

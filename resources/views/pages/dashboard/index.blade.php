@@ -1,7 +1,7 @@
 <x-app-layout>
 
 <div class="m-[5%] w-[90]">
-    {{-- @include('components.alert') --}}
+     @include('components.alert') 
     <div class="flex flex-row">
         {{-- <x-search-component  action="{{route('seach-books-dashboard')}}" :searchTerm="empty($searchTerm) ? '': $searchTerm" :areas="$areas" :categories="$categories" /> --}}
         <div class="flex flex-col w-full md:w-[100%] ">
@@ -41,6 +41,7 @@
                     </td>
 
                     <td class="flex px-4 py-2">
+                        {{--
                         <a href="{{ route('edit-book',['slug'=>$book->slug]) }}">
                             <button class="bg-purple text-white font-bold py-2 px-4 rounded mr-2">update</button>
                         </a>
@@ -48,6 +49,18 @@
                             @csrf
                             <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">delete</button>
                         </form>
+
+                        <x-confirmation-modal title="Confirmation"
+                        message="Are you sure you want to delete this item?"
+                        confirm-action="deleteItem({{ $book->slug }})">
+                            Delete
+                        </x-confirmation-modal>
+                        --}}
+                        <!-- Your Blade view -->
+                        <a href="{{ route('edit-book',['slug'=>$book->slug]) }}">
+                            <button class="bg-purple text-white font-bold py-2 px-4 rounded mr-2">update</button>
+                        </a>
+                        <x-confirmation-modal action="{{ route('delete-book',['slug'=>$book->slug]) }}"></x-confirmation-modal>
                     </td> 
                 </tr>
             @endforeach
