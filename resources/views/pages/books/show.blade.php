@@ -35,7 +35,7 @@
 
         </div>
       </div>
-      <x-comments-section/>
+      <x-comments-section :book_slug="$book->slug" :comments="$book->comments"/>
     </div>
   </section>
 

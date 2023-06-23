@@ -1,6 +1,6 @@
 @props(['rating'])
 
-<div class="flex items-center mx-auto">
+<div class="flex">
     @for($i=1;$i<= 5;$i++)
         @if($i<=$rating)
             <svg class="w-4 h-4 fill-current text-purple mr-2" viewBox="0 0 20 20">

@@ -9,7 +9,7 @@ class BookComment extends Model
     protected $table = 'book_comments';
     public $timestamps = false;
 
-    protected $fillable = [  'user_id', 'book_id', 'comment', 'rate', ];
+    protected $fillable = [  'user_id', 'book_id', 'comment', 'rating', ];
 
     public function book()
     {
