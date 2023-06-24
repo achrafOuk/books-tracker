@@ -27,6 +27,9 @@
         <div :class="{'hidden md:flex md:flex-col md:w-[80%]':!open,'hidden md:flex md:flex-col md:w-[80%]':open}" style=" width: 100%;">
             <p class="icon-settings block sm:hidden" @click="open=!open" style=" padding: 1%; cursor: pointer; width: 10%; text-align: center; background: white; color: black; border: .1rem solid; ">
             </p>
+            <p >
+              Lastest books
+            </p>
             <div class="flex flex-wrap -mx-4 sm:w-full">
               @foreach($books as $book)
                 <x-book-card :book="$book" />
