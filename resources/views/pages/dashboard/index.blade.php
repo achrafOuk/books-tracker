@@ -1,16 +1,22 @@
 <x-app-layout title="admin dashboard">
 
-<div class="m-[5%] w-[90]">
+<div class="m-[5%]" x-data="{open:false}">
      @include('components.alert') 
     <div class="flex flex-row">
-        {{-- <x-search-component  action="{{route('seach-books-dashboard')}}" :searchTerm="empty($searchTerm) ? '': $searchTerm" :areas="$areas" :categories="$categories" /> --}}
-        <div class="flex flex-col w-full md:w-[100%] ">
-            <button class="bg-purple p-5 text-white mb-5 w-fit whitespace-nowrap">
-                <a href="{{ route('create-book') }}" >
-                    Add new book
-                </a>
-            </button>
-        <div class="mb-5">
+        <x-search :authors="$authors" :categories="$categories"/>
+        <div :class="{'hidden md:flex md:flex-col md:w-[80%]':!open,'hidden md:flex md:flex-col md:w-[80%]':open}" style=" width: 100%;">
+            <div class="flex justify-between">
+                <button class="bg-purple p-5 text-white mb-5 w-fit whitespace-nowrap">
+
+                    <a href="{{ route('create-book') }}" >
+                        Add new book
+                    </a>
+                </button>
+
+                <p class="icon-settings block sm:hidden bg-white border border-black p-5 text-black mb-5 w-fit whitespace-nowrap" @click="open=!open" >
+                </p>
+            </div>
+        <div class="mb-5 overflow-x-scroll">
         <table class="table-auto border xl:w-full">
             <thead>
                 <tr>

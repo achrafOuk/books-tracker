@@ -1,25 +1,4 @@
 <x-app-layout :title="$title">
-{{-- 
-<div class="container mx-auto py-10 overflow-x-hidden" >
-  <div class=" text-green-800 bg-green-50 hidden">hello</div>
-  <div class="flex flex-col">
-    <div>
-      <h1 class="mt-[2%] mx-[2%] text-bold text-xl">Lastest books</h1>
-      <div class="flex flex-wrap -mx-4">
-        @foreach($books as $book)
-          <x-book-card :book="$book" />
-        @endforeach
-      </div>
-      @if($books->count()) 
-          @include("components\paginate") 
-      @else
-          No result were found
-      @endif
-    </div>
-    <x-search :authors="$authors" :categories="$categories"/>
-  </div>
-</div>
---}}
 
 <div class="m-[5%] overflow-x-hidden" x-data="{open:false}">
     <div class="flex flex-row w-full">

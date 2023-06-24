@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     public function run()
     {
@@ -23,6 +23,13 @@ class AdminSeeder extends Seeder
             [
                 'name' => 'user',
                 'email' => 'user@user.com',
+                'password' => '123456', // password
+                'role' => 'user'
+            ],
+
+            [
+                'name' => 'user1',
+                'email' => 'user1@user.com',
                 'password' => '123456', // password
                 'role' => 'user'
             ],
