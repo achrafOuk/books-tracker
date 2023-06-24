@@ -1,6 +1,6 @@
 @props(['book_slug','comments','is_book_rated'])
-<div class="container mx-auto py-8">
-  <h1 class="mb-4 text-2xl font-bold">Comments Section</h1>
+<div class="container mx-auto mt-[5%]">
+  <h1 class="mb-4 text-2xl font-bold">Reviews Section</h1>
   @if ( auth()->check() )
     @if(  !$is_book_rated )
         <x-comment-form :book_slug="$book_slug"/>
@@ -10,21 +10,28 @@
     <a class="text-purple" href="{{ route('login') }}">Login</a> to your account so you can add your rating about the book
   @endif
 
-  <div class="mt-8">
-    <h2 class="mb-2 text-lg font-bold">Comments</h2>
-    <ul>
 
-      @foreach($comments as $comment)
-        <li class="mb-4">
-          <div class="mb-2 flex items-center">
-            <span class="font-bold"> {{ $comment->user->name }} </span>
-            <x-rating-system :rating="$comment->rating"/>
-          </div>
-          <p class="text-gray-700">{{ $comment->comment }}</p>
-        </li>
-      @endforeach
-
-    </ul>
-  </div>
-
+  
 </div>
+@foreach($comments as $comment)
+    <article class="mb-6 rounded-lg bg-white text-base">
+      <footer class="mb-2 flex items-center justify-between">
+        <div class="flex items-center">
+          <p class="mr-3 inline-flex items-center text-sm text-black">{{  $comment->user->name }}</p>
+          <x-rating-system :rating="$comment->rating"/>
+        </div>
+      </footer>
+      <p class="text-gray-500 ">{{ $comment->comment }}</p>
+      <div class="flex items-center mt-2 space-x-4">
+          @if( Auth::user()->id ==   $comment->user->id  )
+            <button class="text-sm text-blue-500 hover:underline">Edit</button>
+            <form action="{{ route('delete-book-comment',['slug'=>$book_slug]) }}" method="POST">
+              @csrf
+              <button class="text-sm text-red-500 hover:underline">Delete</button>
+            </form>
+          @else
+            <button class="text-sm text-gray-500 hover:underline">Report</button>
+          @endif
+      </div>
+    </article>
+  @endforeach

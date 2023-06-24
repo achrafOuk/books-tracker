@@ -24,4 +24,12 @@ class BookCommentController extends Controller
         ->with('msg','comment was added')
         ->with('type','green');
     }
+
+    public function delete($slug)
+    {
+        BookComment::where( 'book_id','=',$slug)->where('user_id','=',Auth::user()->id)->delete();
+        return back()
+        ->with('msg','comment was deleted')
+        ->with('type','green');
+    }
 }

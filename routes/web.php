@@ -17,6 +17,8 @@ Route::group(['prefix'=>'books'],function(){
 Route::group(['middleware'=>'role:user'],function(){
     Route::group(['prefix'=>'comment'],function(){
         Route::post('/{slug}/add', [BookCommentController::class, 'store'])->name('store-book-comment');
+        Route::post('/{slug}/update', [BookCommentController::class, 'update'])->name('update-book-comment');
+        Route::post('/{slug}/delete', [BookCommentController::class, 'delete'])->name('delete-book-comment');
     });
 
     Route::group(['prefix'=>'status'],function(){
