@@ -10,12 +10,10 @@
         @else
             <title>{{  str_replace( '_',' ',config('app.name', 'Laravel') ) }}  | {{ $title }}</title>
         @endif
-
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link href="https://file.myfontastic.com/nndA9KwB2TcUwmNCAE6j33/icons.css" rel="stylesheet" />
-
+        <link href="https://file.myfontastic.com/HHrMRS6fmM6hmFoAYrevD4/icons.css" rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
