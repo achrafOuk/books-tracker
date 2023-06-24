@@ -98,7 +98,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div class="block sm:hidden">
-        <div :class="{'block': open, 'hidden': !open}" class="bg-black text-white">
+        <div :class="{'block': open, 'hidden': !open}" class="text-white">
             <div class="pt-2 pb-3 space-y-1 bg-white text-black m-[5%]">
                                 
             @if ( !auth()->check() ||   Auth::user()->type =='normal'  )

@@ -17,7 +17,7 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
-        $status = ['Whishlist','Finished','Dropped'];
+        $status = ['Whishlist','Reading','Finished','Dropped'];
         foreach($status as $statu)
         {
             Status::firstOrCreate([

@@ -46,7 +46,7 @@
               <button class="rounded-md bg-purple px-4 py-2 text-white">Save</button>
             </form>
           @else
-          <form method="POST" action="{{ route('store-book-status',['slug'=>$book->slug]) }}" class="flex mt-2">
+          <form method="POST" action="{{ route('delete-book-status',['slug'=>$book->slug]) }}" class="flex mt-2">
           @csrf
             <p class="mr-2 rounded-md  p-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 w-[90%]">
               {{ $book_status->status->status }}

@@ -22,6 +22,15 @@ class BookStatusController extends Controller
         return back()
         ->with('msg','status of the book was updated')
         ->with('type','green');
+    }
+
+    public function delete($slug)
+    {
+        BookStatus::where('book_id','=',$slug)->where('user_id','=',Auth::user()->id)->delete();
+        return back()
+        ->with('msg','book was removed from track list')
+        ->with('type','green');
 
     }
+
 }
