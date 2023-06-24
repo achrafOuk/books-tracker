@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\BookAuthor;
 use App\Models\BookComment;
 use App\Models\BookCategory;
+use App\Models\BookStatus;
 use App\Models\Status;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Str;
@@ -21,9 +22,9 @@ class BookController extends Controller
     public function __construct() {
         $this->authors =  Author::select('name')->get();
         $this->categories = Category::select('name')->get();
-        $authors = Author::select('name')->get();
-
+        $this->status = Status::get();
     }
+
     public function index()
     {
         $books = Book::paginate(12);
@@ -41,9 +42,16 @@ class BookController extends Controller
 
         $user_id = Auth::user()?->id;
         $is_book_rated = false;
-        if( $user_id != null) $is_book_rated = BookComment::where('user_id','=',$user_id)->where('book_id','=',$slug)->count();
-        $status = Status::get();
-        return view( 'pages.books.show',compact('book','is_book_rated','status') ) ;
+        $is_book_status = false;
+        if( $user_id != null) 
+        {
+            $is_book_rated = BookComment::where('user_id','=',$user_id)->where('book_id','=',$slug)->count();
+            $is_book_status = BookStatus::where('user_id','=',$user_id)->where('book_id','=',$slug)->count();
+        }
+        $status = $this->status;
+        $book_status = $is_book_status ? BookStatus::where('user_id','=',$user_id)->where('book_id','=',$slug)->with('status')->first() : '';
+
+        return view( 'pages.books.show',compact('book','is_book_rated','status','is_book_status','book_status') ) ;
     }
 
     public function create()

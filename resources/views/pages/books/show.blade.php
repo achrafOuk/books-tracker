@@ -35,14 +35,24 @@
             {{ $book->description }}
           </p>
 
+          @if( !$is_book_status )
+            <form method="POST" action="{{ route('store-book-status',['slug'=>$book->slug]) }}" class="flex mt-2">
+              @csrf
+              <select name="status_id" class="mr-2 rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 w-[90%]">
+                @foreach($status as $option)
+                  <option value="{{$option->id}}">{{$option->status}}</option>
+                @endforeach
+              </select>
+              <button class="rounded-md bg-purple px-4 py-2 text-white">Save</button>
+            </form>
+          @else
           <form method="POST" action="{{ route('store-book-status',['slug'=>$book->slug]) }}" class="flex mt-2">
-            @csrf
-            <select name="status_id" class="mr-2 rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 w-[90%]">
-              @foreach($status as $option)
-                <option value="{{$option->id}}">{{$option->status}}</option>
-              @endforeach
-            </select>
-            <button class="rounded-md bg-purple px-4 py-2 text-white">Save</button>
+          @csrf
+            <p class="mr-2 rounded-md  p-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 w-[90%]">
+              {{ $book_status->status->status }}
+            </p>
+            <button class="rounded-md bg-black px-4 py-2 text-white">Saved</button>
+            @endif
           </form>
 
         </div>
