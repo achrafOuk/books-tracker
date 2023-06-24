@@ -22,12 +22,13 @@ class BookController extends Controller
     public function __construct() {
         $this->authors =  Author::select('name')->get();
         $this->categories = Category::select('name')->get();
+        $this->pagination = 12;
         $this->status = Status::get();
     }
 
     public function index()
     {
-        $books = Book::paginate(12);
+        $books = Book::paginate($this->pagination);
         $title ='books list';
         return  view( 'pages.books.index',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
@@ -145,5 +146,31 @@ class BookController extends Controller
         return redirect()->route('dashboard')
         ->with('msg','book was deleted')
         ->with('type','green');
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('q');
+        $authors = $request->input('authors', []);
+        $categories = $request->input('categories', []);
+        // dd($categories);
+        $books = new Book();
+        $books = $books->with(['authors','categories'])->where('name','like','%'.$searchTerm.'%')
+        ->whereHas('authors', function ($query) use ($authors) {
+            for($i=0;$i<count($authors);$i++)
+            {
+                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
+            }
+        })
+        ->whereHas('categories', function ($query) use ($categories) {
+            for($i=0;$i<count($categories);$i++)
+            {
+                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
+            }
+        });
+
+        $books = $books->paginate($this->pagination)->withQueryString();
+
+        return  view( 'pages.books.index',[ 'title'=>$searchTerm,'searchTerm'=>$searchTerm,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
 }

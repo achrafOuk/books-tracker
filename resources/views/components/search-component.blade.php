@@ -1,5 +1,8 @@
 @props(['action','searchTerm','authors','categories','open'])
-<div :class="{'p-4 hidden md:block ':!open,'p-4 z-50 w-full md:w-[50%]':open}">
+{{-- 
+  <div :class="{'p-4 hidden md:block ':!open,'p-4 z-50  md:w-[30%]':open}" class="md:w-[30%] md:mr-2">
+--}}
+<div  :class="{'hidden md:block w-[30%] mr-[2%]':!open,'p-4 z-50 w-full ':open}">
 
   <form  action="{{$action}}" method="GET">
     <p class="icon-settings block sm:hidden" @click="open=!open" style="padding: 2%;cursor: pointer;width: fit-content;text-align: center;background: white;color: black;border: .1rem solid;">

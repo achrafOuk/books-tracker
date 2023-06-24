@@ -6,7 +6,7 @@
         @foreach($values as $value)
             <div>
                 <label class="inline-flex items-center">
-                    @if( !is_null( request()->query('{{$request}}') ) && in_array( $value->name,request()->query('{{$request}}')) )
+                    @if( !is_null( request()->query( $request ) ) && in_array( $value->name,request()->query( $request )) )
                     <input type="checkbox" value="{{$value->name}}" name='categories[]' class="form-checkbox h-5 w-5 text-gray-600"  checked/>
                     @else
                     <input type="checkbox" value="{{$value->name}}" name='categories[]' class="form-checkbox h-5 w-5 text-gray-600"   />

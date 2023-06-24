@@ -9,6 +9,7 @@ use App\Http\Controllers\BookStatusController;
 
 
 Route::get('/',[BookController::class,'index'])->name('index');
+Route::get('search',[BookController::class,'search'])->name('search-books');
 
 Route::group(['prefix'=>'books'],function(){
     Route::get('/{slug}', [BookController::class, 'show'])->name('book-show');
