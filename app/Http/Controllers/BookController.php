@@ -8,9 +8,11 @@ use App\Models\Author;
 use App\Models\Category;
 
 use App\Models\BookAuthor;
+use App\Models\BookComment;
 use App\Models\BookCategory;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -35,7 +37,12 @@ class BookController extends Controller
             return redirect('/404');
         }
         $book = $book->with(['authors','categories','comments'])->withCount('comments as total_comments')->first();
-        return view( 'pages.books.show',compact('book') ) ;
+
+        $user_id = Auth::user()?->id;
+        $is_book_rated = false;
+        if( $user_id != null) $is_book_rated = BookComment::where('user_id','=',$user_id)->where('book_id','=',$slug)->count();
+        $status = ['Whishlist','Finished','Dropped'];
+        return view( 'pages.books.show',compact('book','is_book_rated','status') ) ;
     }
 
     public function create()

@@ -1,8 +1,6 @@
 @props(['book_slug'])
 <form method="POST" action="{{ route('store-book-comment',['slug'=>$book_slug]) }}">
     @csrf
-    @include('components.alert-error')
-    @include('components.alert')
     <div class="mb-4 flex">
         <textarea name="comment" class="w-full  rounded-lg border border-gray-300 px-4 py-2 focus:outline-none" placeholder="Enter your comment"></textarea>
     </div>
