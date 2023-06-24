@@ -1,0 +1,1 @@
+<x-search-component open="open" :searchTerm="empty($searchTerm) ? '': $searchTerm" action="" :authors="$authors" :categories="$categories" /> 

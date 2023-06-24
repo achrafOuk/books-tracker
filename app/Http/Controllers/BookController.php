@@ -29,7 +29,7 @@ class BookController extends Controller
     {
         $books = Book::paginate(12);
         $title ='books list';
-        return view( 'pages.books.index',compact('books','title') ) ;
+        return  view( 'pages.books.index',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
 
     public function show($slug)
