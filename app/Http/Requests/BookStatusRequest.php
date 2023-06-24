@@ -20,7 +20,6 @@ class BookStatusRequest extends FormRequest
     {
         return [
             'status_id' => 'required|integer',
-            'book_id' => 'required|string',
         ];
     }
 
@@ -29,8 +28,6 @@ class BookStatusRequest extends FormRequest
         return [
             'status_id.required' => 'The status ID field is required.',
             'status_id.integer' => 'The status ID field must be an integer.',
-            'book_id.required' => 'The book ID field is required.',
-            'book_id.string' => 'The book ID field must be a string.',
         ];
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookCommentController;
+use App\Http\Controllers\BookStatusController;
 
 
 Route::get('/',[BookController::class,'index'])->name('index');
@@ -13,13 +14,17 @@ Route::group(['prefix'=>'books'],function(){
     Route::get('/{slug}', [BookController::class, 'show'])->name('book-show');
 });
 
-Route::group(['role:user'],function(){
+Route::group(['middleware'=>'role:user'],function(){
     Route::group(['prefix'=>'comment'],function(){
         Route::post('/{slug}/add', [BookCommentController::class, 'store'])->name('store-book-comment');
     });
+
+    Route::group(['prefix'=>'status'],function(){
+        Route::post('/{slug}/add', [BookStatusController::class, 'store'])->name('store-book-status');
+    });
 });
 
-Route::group(['prefix'=>'dashboard','role:admin'],function(){
+Route::group(['prefix'=>'dashboard','middleware'=>'role:admin'],function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix'=>'books'],function(){
         Route::get('add', [BookController::class, 'create'])->name('create-book');

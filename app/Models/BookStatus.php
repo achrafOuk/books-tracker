@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookStatus extends Model
 {
-    protected $table = 'book_status';
+    protected $table = 'book_statuses';
     public $timestamps = false;
 
     protected $fillable = [ 'status_id', 'user_id', 'book_id' ];
