@@ -28,7 +28,8 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::paginate(12);
-        return view( 'pages.books.index',compact('books') ) ;
+        $title ='books list';
+        return view( 'pages.books.index',compact('books','title') ) ;
     }
 
     public function show($slug)

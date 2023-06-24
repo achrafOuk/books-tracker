@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="$book->name">
   <section class="text-gray-700 body-font overflow-hidden bg-white">
     <div class="container px-5 py-24 mx-auto">
       @include('components.alert-error')

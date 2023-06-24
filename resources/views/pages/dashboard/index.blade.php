@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="admin dashboard">
 
 <div class="m-[5%] w-[90]">
      @include('components.alert') 

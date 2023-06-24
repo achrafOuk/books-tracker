@@ -1,5 +1,5 @@
-@props(['page','route', 'name', 'image', 'publication_year','description','categories','authors','category','selected_authors'])
-<x-app-layout>
+@props(['page','route', 'name', 'image', 'publication_year','description','categories','authors','category','selected_authors','title'])
+<x-app-layout title="{{ $title }}">
 <div class="mx-auto w-full py-4">
       <form method="POST" action="{{$route}}" class="mb-4 rounded bg-white px-8 pb-8 pt-6">
         @csrf

@@ -1,6 +1,5 @@
-<x-app-layout>
-
-<div class="container mx-auto py-10">
+<x-app-layout :title="$title">
+<div class="container mx-auto py-10 overflow-x-hidden">
   <div class="flex p-4 mb-4 text-green-800 rounded-lg bg-green-50 hidden">hello</div>
   <h1 class="mt-[2%] mx-[2%] text-bold text-xl">Lastest books</h1>
     <div class="flex flex-wrap -mx-4">

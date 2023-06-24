@@ -24,6 +24,18 @@ class BookCommentController extends Controller
         ->with('msg','comment was added')
         ->with('type','green');
     }
+    public function update($slug,BookCommentRequest $request)
+    {
+        $comment = $request->validated(); 
+        BookComment::where( 'book_id','=',$slug)
+        ->where('user_id','=',Auth::user()->id)->update([
+            'comment'=>$comment['comment'],
+            'rating'=>$comment['rating'],
+        ]);
+        return back()
+        ->with('msg','comment was updated')
+        ->with('type','green');
+    }
 
     public function delete($slug)
     {
