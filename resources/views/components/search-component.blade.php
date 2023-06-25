@@ -1,4 +1,4 @@
-@props(['action','searchTerm','authors','categories','open','tracked'=>false,'status'=>[]])
+@props(['action','searchTerm','authors','categories','open','status'=>[]])
 
 <div  :class="{'hidden md:block w-[30%] mr-[2%]':!open,'p-4 z-50 w-full ':open}">
 
@@ -14,7 +14,7 @@
 
     <x-search-select title="Category" request="categories" :values="$categories">
     </x-search-select>
-    @if($tracked)
+    @if( count($status) )
       <x-search-select title="Status" request="status" :values="$status">
       </x-search-select>
     @endif

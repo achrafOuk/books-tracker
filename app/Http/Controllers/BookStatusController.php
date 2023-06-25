@@ -32,7 +32,7 @@ class BookStatusController extends Controller
         })->paginate(15);
         $title = 'tracked books';
         // dd($books);
-        return  view( 'pages.books.favorite',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories,'status'=>$status] ) ;
+        return  view( 'pages.books.favorite',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories,'status'=>$this->status] ) ;
     }
     public function store($slug,BookStatusRequest $request)
     {
@@ -67,7 +67,6 @@ class BookStatusController extends Controller
                 $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
             }
         });
-
 
         $books = $books->paginate($this->pagination)->withQueryString();
 

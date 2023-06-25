@@ -49,9 +49,9 @@
                                     Profile
                                 </x-dropdown-link>
 
-                                @if(  Auth::user()->type == 'normal')
-                                    <x-dropdown-link :href="route('show-favorites-recipes')">
-                                        Favorite recipes
+                                @if(  Auth::user()->hasRole('user') )
+                                    <x-dropdown-link :href="route('index-book-status')">
+                                        Tracked books
                                     </x-dropdown-link>
                                 @endif
 
@@ -101,7 +101,7 @@
         <div :class="{'block': open, 'hidden': !open}" class="text-white">
             <div class="pt-2 pb-3 space-y-1 bg-white text-black m-[5%]">
                                 
-            @if ( !auth()->check() ||   Auth::user()->type =='normal'  )
+            @if ( !auth()->check() ||   Auth::user()->hasRole('user')   )
                 <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
                     Home
                 </x-responsive-nav-link>
@@ -112,8 +112,8 @@
                         Profile
                     </x-responsive-nav-link>
 
-                    <x-responsive-nav-link :href="route('show-favorites-recipes')">
-                        Favorite recipes
+                    <x-responsive-nav-link :href="route('index-book-status')">
+                        Tracked books
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
