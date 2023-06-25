@@ -1,7 +1,5 @@
-@props(['action','searchTerm','authors','categories','open'])
-{{-- 
-  <div :class="{'p-4 hidden md:block ':!open,'p-4 z-50  md:w-[30%]':open}" class="md:w-[30%] md:mr-2">
---}}
+@props(['action','searchTerm','authors','categories','open','tracked'=>false,'status'=>[]])
+
 <div  :class="{'hidden md:block w-[30%] mr-[2%]':!open,'p-4 z-50 w-full ':open}">
 
   <form  action="{{$action}}" method="GET">
@@ -16,6 +14,10 @@
 
     <x-search-select title="Category" request="categories" :values="$categories">
     </x-search-select>
+    @if($tracked)
+      <x-search-select title="Status" request="status" :values="$status">
+      </x-search-select>
+    @endif
 
     <button type="submit" class="mt-4 bg-purple text-white font-bold py-2 px-4 rounded sm:w-full">
       Search

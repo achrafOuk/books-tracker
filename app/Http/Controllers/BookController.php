@@ -15,6 +15,7 @@ use App\Models\Status;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Actions\BooksSearch;
 
 class BookController extends Controller
 {
@@ -150,27 +151,11 @@ class BookController extends Controller
 
     public function search(Request $request)
     {
-        $searchTerm = $request->input('q');
-        $authors = $request->input('authors', []);
-        $categories = $request->input('categories', []);
-        // dd($categories);
+
         $books = new Book();
-        $books = $books->with(['authors','categories'])->where('name','like','%'.$searchTerm.'%')
-        ->whereHas('authors', function ($query) use ($authors) {
-            for($i=0;$i<count($authors);$i++)
-            {
-                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
-            }
-        })
-        ->whereHas('categories', function ($query) use ($categories) {
-            for($i=0;$i<count($categories);$i++)
-            {
-                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
-            }
-        });
-
+        $booksSearch = new BooksSearch() ;
+        list( $books,$searchTerm,$authors,$categories ) = $booksSearch->execute( $books,$request );
         $books = $books->paginate($this->pagination)->withQueryString();
-
         return  view( 'pages.books.index',[ 'title'=>$searchTerm,'searchTerm'=>$searchTerm,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
     }
 }

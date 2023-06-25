@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Status;
+use App\Actions\BooksSearch;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,7 @@ class BookStatusController extends Controller
         })->paginate(15);
         $title = 'tracked books';
         // dd($books);
-        return  view( 'pages.books.favorite',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
+        return  view( 'pages.books.favorite',['books'=>$books,'title'=>$title,'authors'=>$this->authors,'categories'=>$this->categories,'status'=>$status] ) ;
     }
     public function store($slug,BookStatusRequest $request)
     {
@@ -52,7 +53,26 @@ class BookStatusController extends Controller
         return back()
         ->with('msg','book was removed from track list')
         ->with('type','green');
-
     }
+
+    public function search(Request $request)
+    {
+        $books = new Book();
+        $booksSearch = new BooksSearch() ;
+        list( $books,$searchTerm,$authors,$categories,$status ) = $booksSearch->execute( $books,$request );
+
+        $book = $book->whereHas('status', function ($query) use ($categories) {
+            for($i=0;$i<count($status);$i++)
+            {
+                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
+            }
+        });
+
+
+        $books = $books->paginate($this->pagination)->withQueryString();
+
+        return  view( 'pages.books.favorite',[ 'title'=>$searchTerm,'searchTerm'=>$searchTerm,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
+    }
+
 
 }
