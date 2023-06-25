@@ -26,6 +26,7 @@ Route::group(['middleware'=>'role:user'],function(){
         Route::get('/', [BookStatusController::class, 'index'])->name('index-book-status');
         Route::post('/{slug}/add', [BookStatusController::class, 'store'])->name('store-book-status');
         Route::post('/{slug}/delete', [BookStatusController::class, 'delete'])->name('delete-book-status');
+        Route::get('search', [BookStatusController::class, 'search'])->name('search-book-status');
     });
 });
 

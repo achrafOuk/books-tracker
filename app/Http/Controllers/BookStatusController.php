@@ -61,16 +61,17 @@ class BookStatusController extends Controller
         $booksSearch = new BooksSearch() ;
         list( $books,$searchTerm,$authors,$categories,$status ) = $booksSearch->execute( $books,$request );
 
-        $book = $book->whereHas('status', function ($query) use ($categories) {
+        $books = $books->whereHas('status', function ($query) use ($status) {
+            $query = $query->where('user_id', '=',  Auth::user()->id );
             for($i=0;$i<count($status);$i++)
             {
-                $query = $i==0 ? $query->where('name', '=',  $authors[$i] ) : $query->Orwhere('name', '=',  $authors[$i] ) ;
+                $query = $i==0 ? $query->where('status', '=',  $status[$i] ) : $query->Orwhere('name', '=',  $status[$i] ) ;
             }
         });
 
         $books = $books->paginate($this->pagination)->withQueryString();
 
-        return  view( 'pages.books.favorite',[ 'title'=>$searchTerm,'searchTerm'=>$searchTerm,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
+        return  view( 'pages.books.favorite',[ 'title'=>$searchTerm,'searchTerm'=>$searchTerm,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories,'status'=>$this->status] ) ;
     }
 
 
