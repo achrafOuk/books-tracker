@@ -3,7 +3,8 @@
 <div class="m-[5%]" x-data="{open:false}">
      @include('components.alert') 
     <div class="flex flex-row">
-        <x-search :authors="$authors" :categories="$categories"/>
+
+        <x-search-component open="open" :searchTerm="empty($searchTerm) ? '': $searchTerm" action="{{route('search-books-dashboard') }}" :authors="$authors" :categories="$categories" /> 
         <div :class="{'hidden md:flex md:flex-col md:w-[80%]':!open,'hidden md:flex md:flex-col md:w-[80%]':open}" style=" width: 100%;">
             <div class="flex justify-between">
                 <button class="bg-purple p-5 text-white mb-5 w-fit whitespace-nowrap">

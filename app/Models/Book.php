@@ -24,12 +24,12 @@ class Book extends Model
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'id', 'slug');
+        return $this->hasMany(Note::class, 'book_id', 'slug');
     }
 
     public function status()
     {
-        return $this->hasMany(BookStatus::class, 'id', 'slug');
+        return $this->hasMany(BookStatus::class, 'book_id', 'slug');
     }
 
     public function comments()

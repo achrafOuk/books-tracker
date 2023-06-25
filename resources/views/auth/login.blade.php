@@ -12,6 +12,9 @@
 
       <form class="mt-6" action="{{route('login')}}" method="POST">
         @csrf
+        @include('components.alert-error')
+        @include('components.alert')
+
         <div>
           <label class="block text-gray-700">Email Address</label>
           <template x-if="admin_account">

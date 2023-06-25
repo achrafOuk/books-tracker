@@ -25,7 +25,6 @@ class DashboardController extends Controller
         $books = Book::paginate($this->pagination);
         $columns = $this->columns;
         return view( 'pages.dashboard.index',['columns'=>$columns,'books'=>$books,'authors'=>$this->authors,'categories'=>$this->categories] ) ;
-        return view( 'pages.dashboard.index',compact('columns','books') ) ;
     }
 
     public function search(Request $request)

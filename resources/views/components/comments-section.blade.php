@@ -14,7 +14,7 @@
   
 </div>
 @foreach($comments as $comment)
-    <article class="mb-6 rounded-lg bg-white text-base" x-data="{ edit:false}">
+    <article class="my-6 rounded-lg bg-white text-base" x-data="{ edit:false}">
       <div x-show="!edit">
         <footer class="mb-2 flex items-center justify-between">
           <div class="flex items-center">

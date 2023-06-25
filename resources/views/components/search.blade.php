@@ -1,1 +1,0 @@
-<x-search-component open="open" :searchTerm="empty($searchTerm) ? '': $searchTerm" action="{{route('search-books') }}" :authors="$authors" :categories="$categories" /> 
